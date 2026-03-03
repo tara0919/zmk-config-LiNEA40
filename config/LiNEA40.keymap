@@ -67,7 +67,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,
+            //スクロール方向を逆転,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -78,7 +78,7 @@
 
         ZenkakuHankaku {
             bindings = <&kp GRAVE>;
-            key-positions = <11 12>;
+            key-positions = <13 12>;
         };
 
         DeleteKey {
@@ -204,10 +204,10 @@
 
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans   &trans                            &trans  &trans    &kp UP    &trans     &trans
-&trans  &trans  &kp F7  &kp F10  &kp LEFT_SHIFT                    &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans
-&trans  &trans  &trans  &trans   &trans                            &trans  &trans    &trans    &trans     &trans
-&trans  &trans  &trans  &trans   &trans          &trans    &trans  &trans            &trans    &trans     &trans
+&trans  &trans  &trans  &trans   &trans                             &trans  &trans    &kp UP    &trans     &trans
+&trans  &trans  &kp F7  &kp F10  &kp LEFT_SHIFT                     &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans
+&trans  &trans  &trans  &trans   &trans                             &trans  &trans    &trans    &trans     &trans
+&trans  &trans  &trans  &trans   &trans          &trans    &kp DEL  &trans            &trans    &trans     &trans
             >;
 
             sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
