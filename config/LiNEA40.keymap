@@ -67,7 +67,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,
+            //スクロール方向を逆転,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -96,7 +96,7 @@
             key-positions = <17 16>;
         };
 
-        RightClick {
+        LightClick {
             bindings = <&mkp MB2>;
             key-positions = <18 17>;
         };
@@ -143,10 +143,10 @@
 
         default_layer {
             bindings = <
-&kp Q          &mt LC(W) W   &kp E               &kp R             &kp T                                             &kp Y        &kp U  &kp I                &kp O          &mt LC(P) P
-&mt LC(A) A    &mt LC(S) S   &mt LG(D) D         &mt LEFT_SHIFT F  &mt LEFT_ALT G                                    &kp H        &kp J  &lt 5 K              &kp L          &mt RSHIFT MINUS
-&mt LC(Z) Z    &mt LC(X) X   &mt LC(C) C         &mt LC(V) V       &kp B                                             &kp N        &kp M  &kp COMMA            &kp DOT        &mt RCTRL QUESTION
-&mt LCTRL ESC  &kp LEFT_WIN  &mt LEFT_ALT GRAVE  &trans            &lt 5 ENTER     &mt LG(TAB) TAB    &kp BACKSPACE  &lt 4 SPACE         &lt 6 RIGHT_BRACKET  &kp BACKSLASH  &mt RIGHT_ALT SLASH
+&kp Q               &mt LC(W) W   &kp E               &kp R           &kp T                                          &kp Y        &kp U  &kp I                &kp O          &mt LC(P) P
+&mt LC(A) A         &mt LC(S) S   &mt LG(D) D         &mt LEFT_ALT F  &mt LSHFT G                                    &kp H        &kp J  &lt 5 K              &kp L          &mt RSHIFT MINUS
+&mt LC(Z) Z         &mt LC(X) X   &mt LC(C) C         &mt LC(V) V     &mt LC(B) B                                    &kp N        &kp M  &kp COMMA            &kp DOT        &mt RCTRL QUESTION
+&mt LEFT_SHIFT ESC  &kp LEFT_WIN  &mt LEFT_ALT GRAVE  &trans          &lt 5 ENTER  &mt LG(TAB) TAB    &kp BACKSPACE  &lt 4 SPACE         &lt 6 RIGHT_BRACKET  &kp BACKSLASH  &mt RIGHT_ALT SLASH
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -191,10 +191,10 @@
 
         FUNCTION {
             bindings = <
-&trans  &kp KP_NUMBER_7  &kp KP_NUMBER_8  &kp KP_NUMBER_9  &kp KP_SLASH                            &trans  &trans  &trans  &trans  &trans
-&trans  &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp KP_NUMBER_6  &kp KP_MULTIPLY                         &trans  &trans  &trans  &trans  &trans
-&trans  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp KP_NUMBER_3  &kp KP_MINUS                            &trans  &trans  &trans  &trans  &trans
-&trans  &kp KP_NUMBER_0  &kp KP_DOT       &trans           &kp ENTER        &kp KP_PLUS    &trans  &trans          &trans  &trans  &trans
+&trans  &mt F7 KP_NUMBER_7  &mt F8 KP_NUMBER_8  &mt F9 KP_NUMBER_9  &kp KP_SLASH                                    &trans  &kp LC(LS(TAB))  &kp LG(D)         &kp LC(TAB)       &kp LC(LA(DEL))
+&trans  &mt F4 KP_NUMBER_4  &mt F5 KP_NUMBER_5  &mt F6 KP_NUMBER_6  &mt F12 KP_MULTIPLY                             &trans  &mt LC(T) LG(E)  &kp LG(NUMBER_2)  &kp LG(NUMBER_3)  &kp LG(NUMBER_4)
+&trans  &mt F1 KP_NUMBER_1  &mt F2 KP_NUMBER_2  &mt F3 KP_NUMBER_3  &mt F11 KP_MINUS                                &trans  &trans           &trans            &trans            &trans
+&trans  &kp KP_NUMBER_0     &kp KP_DOT          &trans              &kp ENTER            &mt F10 KP_PLUS    &trans  &trans                   &trans            &trans            &trans
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -204,10 +204,10 @@
 
         SCROLL {
             bindings = <
-&trans  &trans  &trans  &trans          &trans                          &trans  &trans    &kp UP    &trans     &trans
-&trans  &trans  &trans  &kp LEFT_SHIFT  &kp LEFT_ALT                    &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans
-&trans  &trans  &trans  &trans          &trans                          &trans  &trans    &trans    &trans     &trans
-&trans  &trans  &trans  &trans          &trans        &trans    &trans  &trans            &trans    &trans     &trans
+&trans  &trans  &trans  &trans   &trans                            &trans  &trans    &kp UP    &trans     &trans
+&trans  &trans  &kp F7  &kp F10  &kp LEFT_SHIFT                    &trans  &kp LEFT  &kp DOWN  &kp RIGHT  &trans
+&trans  &trans  &trans  &trans   &trans                            &trans  &trans    &trans    &trans     &trans
+&trans  &trans  &trans  &trans   &trans          &trans    &trans  &trans            &trans    &trans     &trans
             >;
 
             sensor-bindings = <&inc_dec_kp DOWN_ARROW UP_ARROW>;
