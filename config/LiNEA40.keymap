@@ -22,11 +22,16 @@
 #define JP_CARET     EQUAL
 #define JP_AMPERSAND CARET
 #define JP_ASTERISK  DOUBLE_QUOTES
+#define JP_DQUOTE    AT
+#define JP_EQUAL     UNDER
 #define JP_PLUS      COLON
 #define JP_TILDE     PLUS
 #define JP_PIPE      LS(INTERNATIONAL_3)
 #define JP_COLON     SINGLE_QUOTE
 #define JP_QUOTE     AMPERSAND
+#define JP_BACKQUOTE LEFT_BRACE
+#define JP_BSLASH    INTERNATIONAL_1
+#define JP_UNDERSCORE LS(INTERNATIONAL_1)
 #define JP_LBRACKET  RIGHT_BRACKET
 #define JP_RBRACKET  BACKSLASH
 #define JP_LPAREN    ASTERISK
@@ -128,25 +133,25 @@
 
         colon {
             timeout-ms = <50>;
-            bindings = <&kp JP_COLON>;
+            bindings = <&jm_colon>;
             key-positions = <28 29>;
         };
 
         quote {
             timeout-ms = <50>;
-            bindings = <&kp JP_QUOTE>;
+            bindings = <&jm_quote>;
             key-positions = <39 40>;
         };
 
         tilde {
             timeout-ms = <50>;
-            bindings = <&kp JP_TILDE>;
+            bindings = <&jm_tilde>;
             key-positions = <18 19>;
         };
 
         plus {
             timeout-ms = <50>;
-            bindings = <&kp JP_PLUS>;
+            bindings = <&jm_plus>;
             key-positions = <8 9>;
         };
 
@@ -304,6 +309,54 @@
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
 
+        jm_plus: japanese_plus {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp JP_PLUS>, <&kp JP_EQUAL>;
+
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        jm_tilde: japanese_tilde {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp JP_TILDE>, <&kp JP_BACKQUOTE>;
+
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        jm_colon: japanese_colon {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp JP_COLON>, <&kp SEMICOLON>;
+
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        jm_quote: japanese_quote {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp JP_QUOTE>, <&kp JP_DQUOTE>;
+
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        jm_question: japanese_question {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp QUESTION>, <&kp SLASH>;
+
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        jm_pipe: japanese_pipe {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp JP_PIPE>, <&kp JP_BSLASH>;
+
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
         minus_lt: japanese_minus_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -318,6 +371,22 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&jm_lbkt>;
+        };
+
+        question_mt: japanese_question_mod_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&jm_question>;
+        };
+
+        pipe_mt: japanese_pipe_mod_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&jm_pipe>;
         };
     };
 
@@ -370,8 +439,8 @@
             bindings = <
 &kp Q          &mt LC(W) W   &kp E          &mt LC(R) R     &mt LC(T) T                                         &kp Y        &mt LC(U) U  &mt LC(I) I   &kp O     &mt LC(P) P
 &mt LC(A) A    &mt LC(S) S   &mt LC(D) D    &mt LEFT_ALT F  &kp G                                               &kp H        &kp J        &lt 5 K       &lt 4 L   &minus_lt 3 0
-&mt LC(Z) Z    &mt LC(X) X   &mt LC(C) C    &mt LC(V) V     &mt LC(B) B                                         &kp N        &kp M        &kp COMMA     &kp DOT   &mt RCTRL QUESTION
-&mt LCTRL ESC  &kp LEFT_WIN  &kp LG(LS(S))  &trans          &lt 5 ENTER  &lt 3 TAB    &mt LEFT_SHIFT BACKSPACE  &lt 4 SPACE               &lbkt_lt 6 0  &jm_rbkt  &mt RIGHT_ALT JP_PIPE
+&mt LC(Z) Z    &mt LC(X) X   &mt LC(C) C    &mt LC(V) V     &mt LC(B) B                                         &kp N        &kp M        &kp COMMA     &kp DOT   &question_mt RCTRL 0
+&mt LCTRL ESC  &kp LEFT_WIN  &kp LG(LS(S))  &trans          &lt 5 ENTER  &lt 3 TAB    &mt LEFT_SHIFT BACKSPACE  &lt 4 SPACE               &lbkt_lt 6 0  &jm_rbkt  &pipe_mt RIGHT_ALT 0
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -392,10 +461,10 @@
 
         MARK {
             bindings = <
-&kp EXCLAMATION             &kp AT           &kp HASH         &kp DOLLAR     &kp PERCENT                      &kp CARET     &kp AMPERSAND  &kp ASTERISK           &kp LEFT_PARENTHESIS  &kp LBKT
-&kp SLASH                   &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp SEMICOLON  &kp SEMICOLON                    &kp C_MUTE    &kp LS(LBKT)   &kp RIGHT_BRACKET      &kp BACKSLASH         &kp EQUAL
-&mt LEFT_SHIFT KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp APOS       &kp SQT                          &kp KP_EQUAL  &kp INT3       &kp LS(RIGHT_BRACKET)  &kp LS(BACKSLASH)     &kp LS(INT1)
-&trans                      &trans           &trans           &trans         &trans         &trans    &trans  &trans                       &kp ASTERISK           &kp LEFT_PARENTHESIS  &kp LS(QUESTION)
+&kp EXCLAMATION             &kp JP_AT        &kp HASH         &kp DOLLAR     &kp PERCENT                      &kp JP_CARET     &kp JP_AMPERSAND  &kp JP_ASTERISK  &kp JP_LPAREN    &kp JP_LBRACKET
+&kp SLASH                   &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp SEMICOLON  &kp SEMICOLON                    &kp C_MUTE      &kp JP_LBRACE     &kp JP_RBRACKET  &kp JP_BSLASH    &kp JP_EQUAL
+&mt LEFT_SHIFT KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp JP_QUOTE   &kp JP_QUOTE                     &kp KP_EQUAL    &kp INT3          &kp JP_RBRACE    &kp JP_PIPE      &kp JP_UNDERSCORE
+&trans                      &trans           &trans           &trans         &trans         &trans    &trans  &trans                       &kp JP_ASTERISK  &kp JP_LPAREN  &kp QUESTION
             >;
 
             sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
