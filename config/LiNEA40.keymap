@@ -22,8 +22,18 @@
 #define JP_CARET     EQUAL
 #define JP_AMPERSAND CARET
 #define JP_ASTERISK  DOUBLE_QUOTES
+#define JP_PLUS      COLON
+#define JP_TILDE     PLUS
+#define JP_PIPE      LS(INTERNATIONAL_3)
+#define JP_COLON     SINGLE_QUOTE
+#define JP_QUOTE     AMPERSAND
+#define JP_LBRACKET  RIGHT_BRACKET
+#define JP_RBRACKET  BACKSLASH
 #define JP_LPAREN    ASTERISK
 #define JP_RPAREN    LEFT_PARENTHESIS
+#define JP_LBRACE    RIGHT_BRACE
+#define JP_RBRACE    PIPE
+#define JP_KANA      LANGUAGE_1
 
 //mouse cursol
 
@@ -114,6 +124,54 @@
         ClickNext {
             bindings = <&mkp MB4>;
             key-positions = <26 27>;
+        };
+
+        colon {
+            timeout-ms = <50>;
+            bindings = <&kp JP_COLON>;
+            key-positions = <28 29>;
+        };
+
+        quote {
+            timeout-ms = <50>;
+            bindings = <&kp JP_QUOTE>;
+            key-positions = <39 40>;
+        };
+
+        tilde {
+            timeout-ms = <50>;
+            bindings = <&kp JP_TILDE>;
+            key-positions = <18 19>;
+        };
+
+        plus {
+            timeout-ms = <50>;
+            bindings = <&kp JP_PLUS>;
+            key-positions = <8 9>;
+        };
+
+        left_parenthesis {
+            timeout-ms = <50>;
+            bindings = <&kp JP_LPAREN>;
+            key-positions = <2 3>;
+        };
+
+        right_parenthesis {
+            timeout-ms = <50>;
+            bindings = <&kp JP_RPAREN>;
+            key-positions = <6 7>;
+        };
+
+        parenthesis_pair {
+            timeout-ms = <50>;
+            bindings = <&type_parens>;
+            key-positions = <2 3 6 7>;
+        };
+
+        bracket_pair {
+            timeout-ms = <50>;
+            bindings = <&type_brackets>;
+            key-positions = <38 39>;
         };
 
         f2 {
@@ -220,6 +278,44 @@
 
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
+
+        jm_minus: japanese_minus {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp MINUS>, <&kp INTERNATIONAL_1>;
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+            keep-mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        jm_lbkt: japanese_left_bracket {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp JP_LBRACKET>, <&kp JP_LBRACE>;
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        jm_rbkt: japanese_right_bracket {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp JP_RBRACKET>, <&kp JP_RBRACE>;
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        minus_lt: japanese_minus_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&jm_minus>;
+        };
+
+        lbkt_lt: japanese_left_bracket_layer_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&jm_lbkt>;
+        };
     };
 
     macros {
@@ -242,6 +338,26 @@
                 <&macro_release>,
                 <&kp LSHFT>;
         };
+
+        type_parens: type_parens {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings =
+                <&macro_tap>,
+                <&kp JP_KANA &kp JP_LPAREN &kp JP_RPAREN &kp ENTER &kp LEFT>;
+        };
+
+        type_brackets: type_brackets {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings =
+                <&macro_tap>,
+                <&kp JP_KANA &kp JP_LBRACKET &kp JP_RBRACKET &kp ENTER &kp LEFT>;
+        };
     };
 
     keymap {
@@ -250,9 +366,9 @@
         default_layer {
             bindings = <
 &kp Q          &mt LC(W) W   &kp E          &mt LC(R) R     &mt LC(T) T                                    &kp Y        &mt LC(U) U  &mt LC(I) I          &kp O          &mt LC(P) P
-&mt LC(A) A    &mt LC(S) S   &mt LC(D) D    &mt LEFT_ALT F  &kp G                                          &kp H        &kp J        &lt 5 K              &lt 4 L        &lt 3 MINUS
+&mt LC(A) A    &mt LC(S) S   &mt LC(D) D    &mt LEFT_ALT F  &kp G                                          &kp H        &kp J        &lt 5 K              &lt 4 L        &minus_lt 3 0
 &mt LC(Z) Z    &mt LC(X) X   &mt LC(C) C    &mt LC(V) V     &mt LC(B) B                                    &kp N        &kp M        &kp COMMA            &kp DOT        &mt RCTRL QUESTION
-&mt LCTRL ESC  &kp LEFT_WIN  &kp LG(LS(S))  &trans          &lt 5 ENTER  &mt LG(TAB) TAB    &kp BACKSPACE  &lt 4 SPACE               &lt 6 RIGHT_BRACKET  &kp BACKSLASH  &mt RIGHT_ALT SLASH
+&mt LCTRL ESC  &kp LEFT_WIN  &kp LG(LS(S))  &trans          &lt 5 ENTER  &mt LG(TAB) TAB    &kp BACKSPACE  &lt 4 SPACE               &lbkt_lt 6 0  &jm_rbkt  &mt RIGHT_ALT JP_PIPE
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -287,9 +403,9 @@
         CURSOR {
             bindings = <
 &numht F1 N1  &jm_n2          &numht F3 N3  &numht F4 N4     &numht F5 N5                       &jm_n6        &jm_n7        &jm_n8        &jm_n9        &jm_n0
-&trans        &kp LEFT_ARROW  &kp DOWN      &kp RIGHT_ARROW  &trans                             &kp KP_SLASH  &kp NUMBER_4  &kp NUMBER_5  &kp NUMBER_6  &kp KP_MINUS
-&kp HOME      &kp PAGE_DOWN   &kp END       &kp PAGE_UP      &trans                             &kp UNDER     &kp NUMBER_1  &kp NUMBER_2  &kp NUMBER_3  &kp ENTER
-&trans        &trans          &trans        &trans           &trans        &trans    &kp ENTER  &kp NUMBER_0                &kp DOT       &kp ENTER     &kp QUESTION
+&trans        &trans          &trans        &trans           &trans                             &trans        &trans        &trans        &trans        &trans
+&trans        &trans          &trans        &trans           &trans                             &trans        &trans        &trans        &trans        &trans
+&trans        &trans          &trans        &trans           &trans        &trans    &trans      &trans                    &trans        &trans        &trans
             >;
         };
 
