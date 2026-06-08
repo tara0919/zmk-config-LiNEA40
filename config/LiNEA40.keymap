@@ -373,12 +373,12 @@
             bindings = <&mo>, <&jm_lbkt>;
         };
 
-        question_mt: japanese_question_mod_tap {
+        question_to: japanese_question_layer_tap {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
-            bindings = <&kp>, <&jm_question>;
+            bindings = <&to>, <&jm_question>;
         };
 
         pipe_mt: japanese_pipe_mod_tap {
@@ -439,7 +439,7 @@
             bindings = <
 &kp Q          &mt LC(W) W   &kp E          &mt LC(R) R     &mt LC(T) T                                         &kp Y        &mt LC(U) U  &mt LC(I) I   &kp O     &mt LC(P) P
 &mt LC(A) A    &mt LC(S) S   &mt LC(D) D    &mt LEFT_ALT F  &kp G                                               &kp H        &kp J        &lt 5 K       &lt 4 L   &minus_lt 3 0
-&mt LC(Z) Z    &mt LC(X) X   &mt LC(C) C    &mt LC(V) V     &mt LC(B) B                                         &kp N        &kp M        &kp COMMA     &kp DOT   &question_mt RCTRL 0
+&mt LC(Z) Z    &mt LC(X) X   &mt LC(C) C    &mt LC(V) V     &mt LC(B) B                                         &kp N        &kp M        &kp COMMA     &kp DOT   &question_to 2 0
 &mt LCTRL ESC  &kp LEFT_WIN  &kp LG(LS(S))  &trans          &lt 5 ENTER  &mt LEFT_SHIFT TAB    &lt 3 BACKSPACE  &lt 4 SPACE               &lbkt_lt 6 0  &jm_rbkt  &pipe_mt RIGHT_ALT 0
             >;
 
@@ -461,13 +461,13 @@
 
         MARK {
             bindings = <
-&kp EXCLAMATION             &kp JP_AT        &kp HASH         &kp DOLLAR     &kp PERCENT                      &kp JP_CARET  &kp JP_AMPERSAND  &kp JP_ASTERISK  &kp JP_LPAREN  &kp JP_LBRACKET
-&kp SLASH                   &kp KP_NUMBER_4  &kp KP_NUMBER_5  &kp SEMICOLON  &kp SEMICOLON                    &kp C_MUTE    &kp JP_LBRACE     &kp JP_RBRACKET  &kp JP_BSLASH  &kp JP_EQUAL
-&mt LEFT_SHIFT KP_NUMBER_0  &kp KP_NUMBER_1  &kp KP_NUMBER_2  &kp JP_QUOTE   &kp JP_QUOTE                     &kp KP_EQUAL  &kp INT3          &kp JP_RBRACE    &kp JP_PIPE    &kp JP_UNDERSCORE
-&trans                      &trans           &trans           &trans         &trans         &trans    &trans  &trans                          &kp JP_ASTERISK  &kp JP_LPAREN  &kp QUESTION
+&kp LC(Z)  &kp LC(Y)  &kp LC(B)  &kp LS(BACKSPACE)  &kp LC(T)                    &kp M     &kp I     &kp O     &kp F9     &kp F10
+&kp A      &kp T      &kp B      &kp W              &kp V                        &kp HOME  &kp J     &kp K     &kp L      &kp END
+&kp LC(S)  &kp LC(X)  &kp LC(C)  &kp LC(V)          &kp F11                      &kp UP    &kp LEFT  &kp DOWN  &kp RIGHT  &to 0
+&to 0      &trans     &kp LS(Z)  &trans             &kp F12   &kp SPACE    &kp DELETE  &kp SPACE           &trans     &trans    &trans
             >;
 
-            sensor-bindings = <&re_kp C_VOLUME_DOWN C_VOLUME_UP>;
+            sensor-bindings = <&re_kp LEFT_ARROW RIGHT_ARROW>;
         };
 
         //3
