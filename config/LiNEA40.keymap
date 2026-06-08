@@ -97,7 +97,7 @@
         layers = <SCROLL>;
         input-processors =
             <&zip_xy_transform INPUT_TRANSFORM_Y_INVERT>,
-            //スクロール方向を逆転,,,,,,,,,,,,
+            //スクロール方向を逆転,,,,,,,,,,,,,
             <&zip_xy_to_scroll_mapper>;
     };
 };
@@ -437,10 +437,10 @@
 
         default_layer {
             bindings = <
-&kp Q          &mt LC(W) W   &kp E          &mt LC(R) R     &mt LC(T) T                                         &kp Y        &mt LC(U) U  &mt LC(I) I   &kp O     &mt LC(P) P
-&mt LC(A) A    &mt LC(S) S   &mt LC(D) D    &mt LEFT_ALT F  &kp G                                               &kp H        &kp J        &lt 5 K       &lt 4 L   &minus_lt 3 0
-&mt LC(Z) Z    &mt LC(X) X   &mt LC(C) C    &mt LC(V) V     &mt LC(B) B                                         &kp N        &kp M        &kp COMMA     &kp DOT   &question_to 2 0
-&mt LCTRL ESC  &kp LEFT_WIN  &kp LG(LS(S))  &trans          &lt 5 ENTER  &mt LEFT_SHIFT TAB    &lt 3 BACKSPACE  &lt 4 SPACE               &lbkt_lt 6 0  &jm_rbkt  &pipe_mt RIGHT_ALT 0
+&kp Q          &mt LC(W) W   &kp E          &mt LC(R) R     &mt LC(T) T                                       &kp Y        &mt LC(U) U  &mt LC(I) I   &kp O     &mt LC(P) P
+&mt LC(A) A    &mt LC(S) S   &mt LC(D) D    &mt LEFT_ALT F  &kp G                                             &kp H        &kp J        &lt 5 K       &lt 4 L   &minus_lt 3 0
+&mt LC(Z) Z    &mt LC(X) X   &mt LC(C) C    &mt LC(V) V     &mt LC(B) B                                       &kp N        &kp M        &kp COMMA     &kp DOT   &question_to 2 0
+&mt LCTRL ESC  &kp LEFT_WIN  &kp LG(LS(S))  &trans          &lt 5 ENTER  &mt LEFT_SHIFT TAB    &kp BACKSPACE  &lt 4 SPACE               &lbkt_lt 6 0  &jm_rbkt  &pipe_mt RIGHT_ALT 0
             >;
 
             sensor-bindings = <&mouse_scrl SCRL_DOWN SCRL_UP>;
@@ -461,10 +461,10 @@
 
         MARK {
             bindings = <
-&kp LC(Z)  &kp LC(Y)  &kp LC(B)  &kp LS(BACKSPACE)  &kp LC(T)                    &kp M     &kp I     &kp O     &kp F9     &kp F10
-&kp A      &kp T      &kp B      &kp W              &kp V                        &kp HOME  &kp J     &kp K     &kp L      &kp END
-&kp LC(S)  &kp LC(X)  &kp LC(C)  &kp LC(V)          &kp F11                      &kp UP    &kp LEFT  &kp DOWN  &kp RIGHT  &to 0
-&to 0      &trans     &kp LS(Z)  &trans             &kp F12   &kp SPACE    &kp DELETE  &kp SPACE           &trans     &trans    &trans
+&kp LC(Z)  &kp LC(Y)  &kp LC(B)  &kp LS(BACKSPACE)  &kp LC(T)                           &kp M      &kp I     &kp O     &kp F9     &kp F10
+&kp A      &kp T      &kp B      &kp W              &kp V                               &kp HOME   &kp J     &kp K     &kp L      &kp END
+&kp LC(S)  &kp LC(X)  &kp LC(C)  &kp LC(V)          &kp F11                             &kp UP     &kp LEFT  &kp DOWN  &kp RIGHT  &to 0
+&to 0      &trans     &kp LS(Z)  &trans             &kp F12    &kp SPACE    &kp DELETE  &kp SPACE            &trans    &trans     &trans
             >;
 
             sensor-bindings = <&re_kp LEFT_ARROW RIGHT_ARROW>;
