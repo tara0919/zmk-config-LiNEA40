@@ -1,0 +1,18 @@
+# Copyright (c) 2026 The ZMK Contributors
+# SPDX-License-Identifier: MIT
+
+config LINEA40_BATTERY_TEXT
+    bool "Type both LiNEA40 battery levels"
+    default y
+    depends on SHIELD_LiNEA40_RIGHT
+    depends on ZMK_BATTERY_REPORTING
+    depends on ZMK_SPLIT_ROLE_CENTRAL
+    depends on ZMK_SPLIT_BLE_CENTRAL_BATTERY_LEVEL_FETCHING
+
+config LINEA40_INERTIAL_SCROLL
+    bool "LiNEA40 inertial scroll input processor"
+    default y
+    depends on SHIELD_LiNEA40_RIGHT
+    depends on ZMK_POINTING
+    depends on ZMK_SPLIT_ROLE_CENTRAL
+    depends on INPUT
