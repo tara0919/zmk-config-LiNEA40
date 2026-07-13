@@ -755,7 +755,7 @@
 &trans      &trans           &trans      &trans       &trans      &trans    &mt LA(LC(DELETE)) DELETE  &kp LS(SPACE)            &trans    &trans     &trans
             >;
 
-            sensor-bindings = <&re_kp LS(LEFT) LS(RIGHT)>;
+            sensor-bindings = <&re_kp LS(RIGHT) LS(LEFT)>;
         };
 
         //3
@@ -769,7 +769,7 @@
 &trans                 &num_eisu KP_NUMBER_0  &num_eisu KP_DOT       &type_00               &num_eisu KP_ENTER     &kp LS(TAB)    &trans  &trans          &trans  &trans  &trans
             >;
 
-            sensor-bindings = <&re_kp C_VOL_UP C_VOL_DN>;
+            sensor-bindings = <&re_kp C_VOL_DN C_VOL_UP>;
         };
 
         //4
