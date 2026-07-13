@@ -355,6 +355,11 @@
             bindings = <&kp LA(TAB)>;
             key-positions = <13 35>;
         };
+
+        adjust_layer {
+            bindings = <&mo 5>;
+            key-positions = <35 36>;
+        };
     };
 
     behaviors {
@@ -800,10 +805,10 @@
         edit_layer {
             display-name = "Edit";
             bindings = <
-&trans      &trans      &trans      &trans      &trans                             &trans            &trans              &trans              &trans              &trans
-&kp N1      &kp N2      &kp N3      &kp N4      &kp N5                             &kp N6            &kp N7              &kp N8              &kp N9              &kp N0
-&kp LS(N1)  &kp JP_AT   &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                         &kp JP_CARET      &kp JP_AMPERSAND    &kp JP_ASTERISK     &kp JP_LPAREN       &kp JP_RPAREN
-&trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans              &trans              &trans              &trans
+&trans      &trans     &trans      &trans      &trans                        &trans        &trans            &trans           &trans         &trans
+&kp N1      &kp N2     &kp N3      &kp N4      &kp N5                        &kp N6        &kp N7            &kp N8           &kp N9         &kp N0
+&kp LS(N1)  &kp JP_AT  &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                    &kp JP_CARET  &kp JP_AMPERSAND  &kp JP_ASTERISK  &kp JP_LPAREN  &kp JP_RPAREN
+&trans      &trans     &trans      &trans      &trans      &trans    &trans  &trans                          &trans           &trans         &trans
             >;
         };
     };
