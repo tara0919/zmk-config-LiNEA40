@@ -203,8 +203,9 @@
     combos {
         compatible = "zmk,combos";
 
-        ZenkakuHankaku {
-            bindings = <&kp GRAVE>;
+        ZenkakuHankakuEdit {
+            timeout-ms = <50>;
+            bindings = <&edit_ime EDIT GRAVE>;
             key-positions = <34 37>;
         };
 
@@ -350,11 +351,6 @@
             key-positions = <13 34>; // F + Enter
         };
 
-        edit_layer {
-            bindings = <&to 5>;
-            key-positions = <35 36>;
-        };
-
         alt+tab {
             bindings = <&kp LA(TAB)>;
             key-positions = <13 35>;
@@ -483,7 +479,7 @@
         jm_colon: japanese_colon {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp JP_COLON>, <&kp SEMICOLON>;
+            bindings = <&kp SEMICOLON>, <&kp JP_COLON>;
 
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
@@ -499,9 +495,17 @@
         jm_question: japanese_question {
             compatible = "zmk,behavior-mod-morph";
             #binding-cells = <0>;
-            bindings = <&kp QUESTION>, <&kp SLASH>;
+            bindings = <&kp SLASH>, <&kp QUESTION>;
 
             mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+
+        edit_ime: edit_ime {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&kp>;
         };
 
         jm_pipe: japanese_pipe {
@@ -796,13 +800,11 @@
         edit_layer {
             display-name = "Edit";
             bindings = <
-&kp LC(Z)  &kp LC(Y)  &kp LC(B)  &kp LS(BACKSPACE)  &kp LC(T)                           &kp M      &kp I     &kp O     &kp F9     &kp F10
-&kp A      &kp T      &kp B      &kp W              &kp V                               &kp HOME   &kp J     &kp K     &kp L      &kp END
-&kp LC(S)  &kp LC(X)  &kp LC(C)  &kp LC(V)          &kp F11                             &kp UP     &kp LEFT  &kp DOWN  &kp RIGHT  &to BASE
-&to BASE   &trans     &kp LS(Z)  &trans             &kp F12    &kp SPACE    &kp DELETE  &kp SPACE            &trans    &trans     &trans
+&trans      &trans      &trans      &trans      &trans                             &trans            &trans              &trans              &trans              &trans
+&kp N1      &kp N2      &kp N3      &kp N4      &kp N5                             &kp N6            &kp N7              &kp N8              &kp N9              &kp N0
+&kp LS(N1)  &kp JP_AT   &kp LS(N3)  &kp LS(N4)  &kp LS(N5)                         &kp JP_CARET      &kp JP_AMPERSAND    &kp JP_ASTERISK     &kp JP_LPAREN       &kp JP_RPAREN
+&trans      &trans      &trans      &trans      &trans      &trans      &trans      &trans              &trans              &trans              &trans
             >;
-
-            sensor-bindings = <&re_kp LEFT_ARROW RIGHT_ARROW>;
         };
     };
 };
