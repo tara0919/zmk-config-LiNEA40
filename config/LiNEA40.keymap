@@ -330,6 +330,11 @@
             key-positions = <12 34>;
         };
 
+        task_viewer {
+            bindings = <&kp LG(TAB)>;
+            key-positions = <13 34>; // F + Enter
+        };
+
         edit_layer {
             bindings = <&to EDIT>;
             key-positions = <35 36>;
