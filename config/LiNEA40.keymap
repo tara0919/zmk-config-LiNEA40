@@ -133,7 +133,6 @@
         require-prior-idle-ms = <300>;
         excluded-positions = <16>;
     };
-
 };
 
 &trackball_listener {
@@ -353,6 +352,26 @@
             slow-release;
             bindings = <&mo ADJUST>;
             key-positions = <35 36>;
+        };
+
+        alt+f4_right {
+            bindings = <&kp LA(F4)>;
+            key-positions = <16 17 37>;
+        };
+
+        alt+tab_right {
+            bindings = <&kp LA(TAB)>;
+            key-positions = <16 36>;
+        };
+
+        task {
+            bindings = <&kp LG(TAB)>;
+            key-positions = <16 37>;
+        };
+
+        win+d_right {
+            bindings = <&kp LG(D)>;
+            key-positions = <17 37>;
         };
     };
 
@@ -707,7 +726,6 @@
                 <&macro_tap>,
                 <&kp JP_EISU>;
         };
-
     };
 
     keymap {
@@ -744,10 +762,10 @@
         lower_layer {
             display-name = "Lower";
             bindings = <
-&trans      &kp LC(LS(TAB))  &kp LC(W)   &kp LC(TAB)  &kp LC(T)                                        &trans         &trans    &kp UP    &trans     &trans
-&kp LG(N1)  &kp LG(N2)       &kp LG(N3)  &kp LG(N4)   &kp LG(N5)                                       &trans         &kp LEFT  &kp DOWN  &kp RIGHT  &trans
-&kp LC(N1)  &kp LC(N2)       &kp LC(N3)  &kp LC(N4)   &kp LC(N5)                                       &trans         &trans    &trans    &trans     &trans
-&trans      &trans           &trans      &trans       &trans      &trans    &mt LA(LC(DELETE)) DELETE  &kp LS(SPACE)            &trans    &trans     &trans
+&trans      &kp LC(LS(TAB))  &kp LC(W)   &kp LC(TAB)  &kp LC(T)                                        &trans         &trans             &kp UP    &trans               &trans
+&kp LG(N1)  &kp LG(N2)       &kp LG(N3)  &kp LG(N4)   &kp LG(N5)                                       &trans         &mt LG(LEFT) LEFT  &kp DOWN  &mt LG(RIGHT) RIGHT  &trans
+&kp LC(N1)  &kp LC(N2)       &kp LC(N3)  &kp LC(N4)   &kp LC(N5)                                       &trans         &kp LG(LS(LEFT))   &trans    &kp LS(LG(RIGHT))    &trans
+&trans      &trans           &trans      &trans       &trans      &trans    &mt LA(LC(DELETE)) DELETE  &kp LS(SPACE)                     &trans    &trans               &trans
             >;
 
             sensor-bindings = <&re_kp LS(RIGHT) LS(LEFT)>;
