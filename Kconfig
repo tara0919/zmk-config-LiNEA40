@@ -16,3 +16,8 @@ config LINEA40_INERTIAL_SCROLL
     depends on ZMK_POINTING
     depends on ZMK_SPLIT_ROLE_CENTRAL
     depends on INPUT
+
+config LINEA40_INERTIAL_SCROLL_DEBUG
+    bool "Log LiNEA40 inertial scroll input windows"
+    default n
+    depends on LINEA40_INERTIAL_SCROLL
