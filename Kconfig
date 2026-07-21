@@ -21,3 +21,21 @@ config LINEA40_INERTIAL_SCROLL_DEBUG
     bool "Log LiNEA40 inertial scroll input windows"
     default n
     depends on LINEA40_INERTIAL_SCROLL
+
+config LINEA40_AXIS_KEYS
+    bool "LiNEA40 axis-to-key input processor"
+    default y
+    depends on SHIELD_LiNEA40_RIGHT
+    depends on ZMK_POINTING
+    depends on ZMK_SPLIT_ROLE_CENTRAL
+    depends on INPUT
+
+config LINEA40_AXIS_KEYS_THREAD_STACK_SIZE
+    int "LiNEA40 axis-to-key worker thread stack size"
+    default 1536
+    depends on LINEA40_AXIS_KEYS
+
+config LINEA40_AXIS_KEYS_THREAD_PRIORITY
+    int "LiNEA40 axis-to-key worker thread priority"
+    default 8
+    depends on LINEA40_AXIS_KEYS

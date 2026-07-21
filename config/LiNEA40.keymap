@@ -79,8 +79,13 @@
         compatible = "zmk,input-processor-inertial-scroll";
         #input-processor-cells = <0>;
         type = <INPUT_EV_REL>;
-        codes = <INPUT_REL_Y>;
+        codes = <INPUT_REL_X INPUT_REL_Y>;
         output-code = <INPUT_REL_WHEEL>;
+        axis-lock;
+        axis-lock-threshold = <8>;
+        axis-lock-ratio-percent = <150>;
+        axis-lock-max-pending = <12>;
+        axis-lock-release-ms = <80>;
         interval-ms = <12>;
         gain-percent = <2>;
         velocity-percent = <75>;
@@ -103,32 +108,16 @@
         cancel-layer = <MOUSE>;
     };
 
-    inertial_hscroll: inertial_hscroll {
-        compatible = "zmk,input-processor-inertial-scroll";
+    task_axis_keys: task_axis_keys {
+        compatible = "zmk,input-processor-axis-keys";
         #input-processor-cells = <0>;
         type = <INPUT_EV_REL>;
-        codes = <INPUT_REL_X>;
-        output-code = <INPUT_REL_HWHEEL>;
-        interval-ms = <12>;
-        gain-percent = <2>;
-        velocity-percent = <75>;
-        min-velocity = <34>;
-        start-threshold = <1>;
-        burst-threshold = <8>;
-        burst-peak-threshold = <12>;
-        burst-peak-percent = <0>;
-        burst-timeout-ms = <25>;
-        burst-window-ms = <25>;
-        release-ms = <35>;
-        candidate-tail-base-ms = <60>;
-        candidate-tail-per-peak-ms = <3>;
-        candidate-tail-max-ms = <360>;
-        decay-percent = <97>;
-        tail-decay-percent = <99>;
-        tail-threshold = <20>;
-        stop-threshold = <7>;
-        max-step = <1>;
-        cancel-layer = <MOUSE>;
+        code = <INPUT_REL_X>;
+        consume-codes = <INPUT_REL_X INPUT_REL_Y>;
+        threshold = <80>;
+        min-interval-ms = <35>;
+        tap-ms = <10>;
+        bindings = <&kp LS(LEFT)>, <&kp LS(RIGHT)>;
     };
 
     mouse_temp_layer: mouse_temp_layer {
@@ -142,25 +131,20 @@
 &trackball_listener {
     input-processors = <&zip_mouse_gesture &mouse_temp_layer MOUSE 500>;
 
-    vertical_scroller {
+    scroller {
         layers = <LOWER>;
         input-processors = <
             &zip_xy_transform INPUT_TRANSFORM_Y_INVERT
-            &zip_x_scaler 0 1
             &inertial_scroll
-            &zip_xy_scaler 1 70
+            &zip_x_scaler 1 20
+            &zip_y_scaler 1 70
             &zip_xy_to_scroll_mapper
         >;
     };
 
-    horizontal_scroller {
+    task_selector {
         layers = <RAISE>;
-        input-processors = <
-            &zip_y_scaler 0 1
-            &inertial_hscroll
-            &zip_xy_scaler 1 20
-            &zip_xy_to_scroll_mapper
-        >;
+        input-processors = <&task_axis_keys>;
     };
 
     slow_cursor {
@@ -342,7 +326,7 @@
         };
 
         task_viewer {
-            bindings = <&kp LG(TAB)>;
+            bindings = <&task_view_raise>;
             key-positions = <13 34>; // F + Enter
         };
 
@@ -528,6 +512,15 @@
             flavor = "tap-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&kp>;
+        };
+
+        task_enter: task_enter {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            bindings = <&task_enter_hold>, <&task_enter_tap>;
         };
 
         jm_pipe: japanese_pipe {
@@ -730,6 +723,41 @@
                 <&macro_tap>,
                 <&kp JP_EISU>;
         };
+
+        task_view_raise: task_view_raise {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings =
+                <&macro_tap>,
+                <&kp LG(TAB)>,
+                <&to RAISE>;
+        };
+
+        task_enter_tap: task_enter_tap {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings =
+                <&macro_tap>,
+                <&kp ENTER>,
+                <&to BASE>;
+        };
+
+        task_enter_hold: task_enter_hold {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings =
+                <&macro_tap>,
+                <&to LOWER>,
+                <&macro_pause_for_release>,
+                <&macro_tap>,
+                <&to RAISE>;
+        };
     };
 
     keymap {
@@ -783,7 +811,7 @@
 &num_eisu KP_PLUS      &num_eisu KP_NUMBER_7  &num_eisu KP_NUMBER_8  &num_eisu KP_NUMBER_9  &num_eisu KP_SLASH                            &trans  &trans  &trans  &trans  &trans
 &trans                 &num_eisu KP_NUMBER_4  &num_eisu KP_NUMBER_5  &num_eisu KP_NUMBER_6  &num_eisu KP_MULTIPLY                         &trans  &kp F7  &kp F8  &kp F9  &kp F10
 &num_eisu KP_NUMBER_0  &num_eisu KP_NUMBER_1  &num_eisu KP_NUMBER_2  &num_eisu KP_NUMBER_3  &num_eisu KP_MINUS                            &trans  &trans  &trans  &trans  &trans
-&trans                 &num_eisu KP_NUMBER_0  &num_eisu KP_DOT       &type_00               &num_eisu KP_ENTER     &kp LS(TAB)    &trans  &trans          &trans  &trans  &trans
+&trans                 &num_eisu KP_NUMBER_0  &num_eisu KP_DOT       &type_00               &task_enter 0 0         &kp LS(TAB)    &trans  &trans          &trans  &trans  &trans
             >;
 
             sensor-bindings = <&re_kp C_VOL_DN C_VOL_UP>;
