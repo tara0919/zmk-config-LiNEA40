@@ -81,8 +81,13 @@
         #input-processor-cells = <0>;
         axis = <1>;
         layer = <LOWER>;
-        scale = <4>;
-        scale-div = <675>;
+        start = <12>;
+        move = <24>;
+        min-events = <4>;
+        decel-samples = <2>;
+        stop = <4>;
+        scale = <1>;
+        scale-div = <70>;
     };
 
     inertial_hscroll: inertial_hscroll {
@@ -90,8 +95,13 @@
         #input-processor-cells = <0>;
         axis = <2>;
         layer = <RAISE>;
-        scale = <4>;
-        scale-div = <675>;
+        start = <12>;
+        move = <24>;
+        min-events = <4>;
+        decel-samples = <2>;
+        stop = <1>;
+        scale = <1>;
+        scale-div = <20>;
     };
 #endif
 
@@ -115,7 +125,7 @@
 #if defined(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
             &inertial_scroll
 #endif
-            &zip_scroll_scaler 4 675
+            &zip_scroll_scaler 1 70
         >;
     };
 
@@ -127,7 +137,7 @@
 #if defined(CONFIG_ZMK_SPLIT_ROLE_CENTRAL)
             &inertial_hscroll
 #endif
-            &zip_scroll_scaler 4 675
+            &zip_scroll_scaler 1 20
         >;
     };
 
